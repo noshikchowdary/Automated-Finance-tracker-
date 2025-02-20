@@ -4,6 +4,22 @@ import pandas as pd
 st.title('Personal Finance Dashboard')
 st.write('Upload your bank statement as a CSV file.')
 
+CATEGORY_KEYWORDS = {
+    'Shopping': ['amazon', 'store', 'retail'],
+    'Transportation': ['uber', 'taxi', 'fuel', 'gas'],
+    'Food & Dining': ['grocery', 'restaurant', 'cafe'],
+    'Entertainment': ['netflix', 'movie', 'concert'],
+    'Utilities': ['electric', 'water', 'internet', 'phone'],
+    'Uncategorized': []
+}
+
+def categorize(details):
+    details = str(details).lower()
+    for category, keywords in CATEGORY_KEYWORDS.items():
+        if any(keyword in details for keyword in keywords):
+            return category
+    return 'Uncategorized'
+
 uploaded_file = st.file_uploader('Choose a CSV file', type='csv')
 if uploaded_file:
     try:
@@ -17,7 +33,8 @@ if uploaded_file:
             df['Amount'] = pd.to_numeric(df['Amount'], errors='coerce')
             df['Date'] = pd.to_datetime(df['Date'], errors='coerce')
             df = df.dropna(subset=['Date', 'Amount'])
-            st.write('Cleaned and validated data:')
+            df['Category'] = df['Details'].apply(categorize)
+            st.write('Categorized data:')
             st.dataframe(df.head())
     except Exception as e:
         st.error(f'Error reading or cleaning CSV: {e}')
