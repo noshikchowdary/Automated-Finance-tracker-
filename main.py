@@ -34,6 +34,16 @@ if uploaded_file:
             df['Date'] = pd.to_datetime(df['Date'], errors='coerce')
             df = df.dropna(subset=['Date', 'Amount'])
             df['Category'] = df['Details'].apply(categorize)
+
+            # Summary metrics
+            total_income = df[df['Debit/Credit'] == 'Credit']['Amount'].sum()
+            total_expenses = df[df['Debit/Credit'] == 'Debit']['Amount'].sum()
+            net_income = total_income - total_expenses
+            col1, col2, col3 = st.columns(3)
+            col1.metric('Total Income', f"${total_income:,.2f}")
+            col2.metric('Total Expenses', f"${total_expenses:,.2f}")
+            col3.metric('Net Income', f"${net_income:,.2f}")
+
             st.write('Categorized data:')
             st.dataframe(df.head())
     except Exception as e:
