@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import plotly.express as px
 
 st.title('Personal Finance Dashboard')
 st.write('Upload your bank statement as a CSV file.')
@@ -46,5 +47,18 @@ if uploaded_file:
 
             st.write('Categorized data:')
             st.dataframe(df.head())
+
+            # Category distribution visualizations
+            expense_df = df[df['Debit/Credit'] == 'Debit']
+            if not expense_df.empty:
+                cat_summary = expense_df.groupby('Category')['Amount'].sum().reset_index()
+                st.subheader('Spending by Category')
+                col4, col5 = st.columns(2)
+                with col4:
+                    pie_fig = px.pie(cat_summary, values='Amount', names='Category', title='Expense Distribution')
+                    st.plotly_chart(pie_fig, use_container_width=True)
+                with col5:
+                    bar_fig = px.bar(cat_summary, x='Category', y='Amount', title='Expenses by Category')
+                    st.plotly_chart(bar_fig, use_container_width=True)
     except Exception as e:
         st.error(f'Error reading or cleaning CSV: {e}')
