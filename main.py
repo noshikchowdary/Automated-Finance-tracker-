@@ -60,5 +60,12 @@ if uploaded_file:
                 with col5:
                     bar_fig = px.bar(cat_summary, x='Category', y='Amount', title='Expenses by Category')
                     st.plotly_chart(bar_fig, use_container_width=True)
+
+                # Time series visualization for monthly spend
+                expense_df['Month'] = expense_df['Date'].dt.to_period('M').astype(str)
+                monthly_summary = expense_df.groupby('Month')['Amount'].sum().reset_index()
+                st.subheader('Monthly Spend Trend')
+                line_fig = px.line(monthly_summary, x='Month', y='Amount', title='Monthly Expenses Over Time')
+                st.plotly_chart(line_fig, use_container_width=True)
     except Exception as e:
         st.error(f'Error reading or cleaning CSV: {e}')
