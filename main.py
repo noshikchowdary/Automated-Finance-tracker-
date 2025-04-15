@@ -14,13 +14,32 @@ CATEGORY_KEYWORDS = {
     'Uncategorized': []
 }
 
-def categorize(details):
-    details = str(details).lower()
-    for category, keywords in CATEGORY_KEYWORDS.items():
-        if any(keyword in details for keyword in keywords):
-            return category
-    return 'Uncategorized'
+# --- Category and Keyword Management UI ---
+st.sidebar.header('Manage Categories')
+with st.sidebar.expander('Add New Category'):
+    new_category = st.text_input('Category Name', key='cat_name')
+    if st.button('Add Category'):
+        if new_category and new_category not in CATEGORY_KEYWORDS:
+            CATEGORY_KEYWORDS[new_category] = []
+            st.success(f"Added category: {new_category}")
+        elif new_category:
+            st.warning('Category already exists or invalid name.')
 
+with st.sidebar.expander('Add Keyword to Category'):
+    selected_cat = st.selectbox('Select Category', list(CATEGORY_KEYWORDS.keys()), key='cat_select')
+    new_keyword = st.text_input('Keyword', key='kw_name')
+    if st.button('Add Keyword'):
+        if new_keyword and new_keyword.lower() not in CATEGORY_KEYWORDS[selected_cat]:
+            CATEGORY_KEYWORDS[selected_cat].append(new_keyword.lower())
+            st.success(f"Added keyword '{new_keyword}' to {selected_cat}")
+        elif new_keyword:
+            st.warning('Keyword already exists or invalid.')
+
+with st.sidebar.expander('Current Categories & Keywords'):
+    for cat, keywords in CATEGORY_KEYWORDS.items():
+        st.write(f"**{cat}:** {', '.join(keywords) if keywords else 'No keywords'}")
+
+# --- File Upload and Analysis ---
 uploaded_file = st.file_uploader('Choose a CSV file', type='csv')
 if uploaded_file:
     try:
@@ -54,6 +73,13 @@ if uploaded_file:
                     if not invalid_rows.empty:
                         st.warning(f"{len(invalid_rows)} rows were removed due to invalid date or amount.")
                     df = df.dropna(subset=['Date', 'Amount'])
+                    # Use updated CATEGORY_KEYWORDS for categorization
+                    def categorize(details):
+                        details = str(details).lower()
+                        for category, keywords in CATEGORY_KEYWORDS.items():
+                            if any(keyword in details for keyword in keywords):
+                                return category
+                        return 'Uncategorized'
                     df['Category'] = df['Details'].apply(categorize)
 
                     # Summary metrics
