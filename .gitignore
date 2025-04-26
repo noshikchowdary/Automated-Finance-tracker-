@@ -1,0 +1,15 @@
+# macOS system files
+.DS_Store
+
+# Ignore accidental folder
+Mac HD/
+
+# Python bytecode files
+__pycache__/
+*.pyc
+
+# Virtual environment folders
+env/
+venv/
+
+
