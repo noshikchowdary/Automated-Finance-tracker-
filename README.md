@@ -1,58 +1,86 @@
-Personal Finance Dashboard
+# 📊 Personal Finance Dashboard
 
-A simple and interactive web application built with Streamlit to help you analyze and categorize your personal finance transactions from your bank statements.
+A simple and powerful Streamlit app that lets users visualize, categorize, and analyze their personal financial transactions using uploaded bank statements.
 
-Features
+---
 
-Upload bank statement CSV files easily.
-Automatically categorize transactions based on user-defined keywords.
-Create, edit, and manage custom expense categories.
-Visualize expenses by category with interactive pie charts.
-View detailed expenses and income transactions.
-Save category keywords persistently in a JSON file.
-User-friendly interface with editable transaction tables.
-How It Works
+## 🚀 Features
 
-Upload CSV: Upload your bank statement in CSV format with columns like Date, Details, Amount, and Debit/Credit.
-Auto-categorization: Transactions are auto-categorized by matching keywords in the transaction details.
-Edit Categories: Add new categories or update existing ones directly from the app.
-Expense Management: View and edit categorized expense transactions.
-Summary & Visualization: See total expenses grouped by category and visualize them with a pie chart.
-Income Tab: View total income and detailed income transactions.
-Getting Started
+- ✅ Upload CSV bank statements for quick parsing
+- 🏷️ Auto-categorize expenses based on keywords
+- ✍️ Manually edit and save transaction categories
+- 📊 Pie charts and tables for spending insights
+- 💾 Category memory stored locally (JSON)
+- 📁 Built using Streamlit, pandas, and Plotly
 
-Prerequisites
-Python 3.8+
-Install required libraries:
-pip install streamlit pandas plotly
-Running the App
-Clone the repository:
-git clone https://github.com/yourusername/your-repo-name.git
-cd your-repo-name
-Run the Streamlit app:
+---
+
+
+## 🧠 How It Works
+
+1. Upload a `.csv` bank statement.
+2. The app automatically separates **Debits** and **Credits**.
+3. Expenses are auto-tagged into categories based on keyword matching.
+4. Users can:
+   - Add custom categories
+   - Assign transactions to categories manually
+   - Visualize spending in a pie chart
+
+---
+
+## 💼 Why This Project?
+
+This dashboard mimics how real-world finance tools work — automating ETL-like parsing, categorization logic, and data visualization.
+
+It showcases:
+- Practical **data cleaning & transformation**
+- Custom **rule-based classification logic**
+- **Interactive UI** design with Streamlit
+- Modern data visualization using Plotly
+
+---
+
+## 🛠️ Tech Stack
+
+- `Streamlit` – for web UI
+- `Pandas` – for data transformation
+- `Plotly` – for rich charts
+- `JSON` – for persistent category memory
+- `CSV` – input data format
+
+---
+
+## 📁 File Structure
+```bash
+📦finance-dashboard
+┣ 📜 app.py
+┣ 📜 categories.json
+┣ 📜 sample_data.csv
+┗ 📜 README.md
+```
+
+
+
+---
+
+## 📊 Sample Data Format
+
+Make sure your CSV file includes the following columns:
+
+
+- `Date`: Transaction date (e.g., `01 Jan 2024`)
+- `Details`: Merchant or description
+- `Amount`: Amount spent or received
+- `Debit/Credit`: Type of transaction
+
+---
+
+## ⚙️ Run Locally
+
+```bash
+git clone https://github.com/your-username/finance-dashboard.git
+cd finance-dashboard
+pip install -r requirements.txt
 streamlit run app.py
-Open the link provided in the terminal (usually http://localhost:8501) in your web browser.
-File Structure
 
-app.py — Main Streamlit app file.
-categories.json — Stores user-defined categories and keywords persistently.
-README.md — Project overview and instructions.
-CSV Format Requirements
 
-Your CSV file should contain the following columns (case-insensitive):
-
-Date — Transaction date, formatted like 01 Jan 2023.
-Details — Description of the transaction.
-Amount — Amount of money involved (can include commas).
-Debit/Credit — Specify if the transaction is a debit or credit.
-Customization
-
-Modify or add categories in the app interface.
-Keywords for auto-categorization can be edited and saved dynamically.
-Supports unlimited categories and keywords.
-Future Improvements
-
-Support for multiple file formats (Excel, OFX).
-Enhanced visualization (time series, monthly trends).
-Export categorized transactions.
-User authentication for personalized experiences.
