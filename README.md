@@ -40,7 +40,7 @@ It showcases:
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Tech stack.
 
 - `Streamlit` – for web UI
 - `Pandas` – for data transformation
