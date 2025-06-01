@@ -23,7 +23,7 @@ class Config:
         "Transportation": ["uber", "taxi", "gas", "fuel", "parking"],
         "Shopping": ["amazon", "store", "retail", "clothing"],
         "Utilities": ["electric", "water", "internet", "phone"],
-        "Entertainment": ["netflix", "spotify", "movie", "concert"],
+        "Entertainment": ["netflix", "spotify", "movie", "concert"]
         "Healthcare": ["pharmacy", "doctor", "hospital", "medical"],
         "Uncategorized": []
     }
