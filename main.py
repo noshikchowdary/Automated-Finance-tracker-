@@ -395,7 +395,7 @@ class FinanceDashboard:
 def main():
     """Application entry point"""
     try:
-        dashboard = FinanceDashboard()
+        dashboar = FinanceDashboard()
         dashboard.run()
     except Exception as e:
         st.error(f"Application error: {str(e)}")
