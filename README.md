@@ -6,7 +6,7 @@ A simple and powerful Streamlit app that lets users visualize, categorize, and a
 
 ## 🚀 Features
 
-- ✅ Upload CSV bank statements for quick parsing
+- ✅ Upload CSV bank statements for parsing
 - 🏷️ Auto-categorize expenses based on keywords
 - ✍️ Manually edit and save transaction categories
 - 📊 Pie charts and tables for spending insights
