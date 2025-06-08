@@ -1,4 +1,4 @@
-# 📊 Personal Finance Dashboard
+# 📊 Personal Finance Dashboar
 
 A simple and powerful Streamlit app that lets users visualize, categorize, and analyze their personal financial transactions using uploaded bank statements.
 
